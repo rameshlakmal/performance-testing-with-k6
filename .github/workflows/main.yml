@@ -25,14 +25,11 @@ jobs:
       - name: Sync files to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
-          aws-region: ap-south-1
-          source: ./summary.html
-          destination: k6-reports/
-          # Optional: Delete files in S3 that don't exist locally
-          delete: false
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_REGION: ap-south-1
+
 
       - name: Output uploaded file URL
         run: echo "Uploaded to https://ap-south-1.amazonaws.com/k6-test-report/k6-reports/summary.html"
