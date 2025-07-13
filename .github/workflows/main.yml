@@ -26,7 +26,6 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          bucket: ${{ secrets.AWS_S3_BUCKET }} # Better to store bucket name in secrets
           aws-region: ap-south-1
           source-dir: .
           destination-bucket: k6-test-report
