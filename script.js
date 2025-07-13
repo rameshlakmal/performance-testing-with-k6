@@ -1,6 +1,7 @@
 import http from "k6/http";
 import { sleep, check } from "k6";
 import { randomString } from "https://jslib.k6.io/k6-utils/1.2.0/index.js";
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 
 export const options = {
   vus: 10, // Virtual users
@@ -15,6 +16,12 @@ export default function () {
   });
 
   sleep(1); // Wait for 1 second between iterations
+}
+
+export function handleSummary(data) {
+  return {
+    "summary.html": htmlReport(data),
+  };
 }
 
 // export const options = {
