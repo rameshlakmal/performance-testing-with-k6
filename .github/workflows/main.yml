@@ -20,18 +20,15 @@ jobs:
       #   with:
       #     name: k6-html-report
       #     path: summary.html
-
-      - name: Upload summary.html to S3
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+          
 
       - name: Sync files to S3
         uses: jakejarvis/s3-sync-action@master
         with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+          aws-region: ap-south-1
           source: ./summary.html
           destination: k6-reports/
           # Optional: Delete files in S3 that don't exist locally
