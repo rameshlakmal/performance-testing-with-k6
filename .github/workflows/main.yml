@@ -31,7 +31,7 @@ jobs:
       - name: Sync files to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          bucket: ${{ secrets.AWS_S3_BUCKET }}
+          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
           source: ./summary.html
           destination: k6-reports/
           # Optional: Delete files in S3 that don't exist locally
