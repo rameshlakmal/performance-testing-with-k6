@@ -1,5 +1,7 @@
 name: Basic Workflow
-on: [push]
+on: 
+  workflow_dispatch:  # Allows manual triggering
+  push:
 
 jobs:
   k6_local_test:
