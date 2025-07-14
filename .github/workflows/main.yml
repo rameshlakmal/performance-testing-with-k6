@@ -31,7 +31,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Sync files to S3
-        uses: aws-actions/s3-sync@v2
+        uses: aws-actions/upload-s3@v2
         with:
           bucket: ${{ secrets.AWS_S3_BUCKET }}  # Ensure this secret is set!
           source: ./summary.html
