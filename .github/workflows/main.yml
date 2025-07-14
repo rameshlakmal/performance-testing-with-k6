@@ -35,8 +35,8 @@ jobs:
         id: upload
         run: |
           TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-          aws s3 cp ./summary.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html
-          echo "REPORT_URL=https://${{ secrets.AWS_S3_BUCKET }}.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary.html" >> $GITHUB_OUTPUT
+          aws s3 cp ./summary.html s3://k6-test-report/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html
+          echo "REPORT_URL=https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary.html" >> $GITHUB_OUTPUT
 
       - name: Show Report URL
         run: |
