@@ -34,6 +34,18 @@ jobs:
       - name: Upload to S3
         id: upload
         run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          aws s3 cp ./summary.html s3://k6-test-report/k6-reports/run_$(date +%Y%m%d_%H%M%S)/summary_$TIMESTAMP.html    
+          REPORT_URL="https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary_$TIMESTAMP.html"
+
+          # Display in workflow (3 ways)
+          echo "::notice title=📊 K6 Report Published::View report: $REPORT_URL"
+          echo "REPORT_URL=$REPORT_URL" >> $GITHUB_OUTPUT
+          echo "### 🔗 Performance Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "[Click to view full report]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "Direct URL: \`$REPORT_URL\`" >> $GITHUB_STEP_SUMMARY
+
+        
           aws s3 cp ./summary.html s3://k6-test-report/k6-reports/run_$(date +%Y%m%d_%H%M%S)/summary_$(date +%Y%m%d_%H%M%S).html
           echo "Permanent URL: https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$(date +%Y%m%d_%H%M%S)/summary_$(date +%Y%m%d_%H%M%S).html"
 
