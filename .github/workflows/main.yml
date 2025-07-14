@@ -35,11 +35,9 @@ jobs:
       - name: Get Public URL
         run: |
           echo "Public URL:"
-          echo "https://${{ secrets.AWS_S3_BUCKET }}.s3.ap-south-1.amazonaws.com/k6-reports/summary_${{ github.run_id }}.html"
-
-
-          
-
+          echo "https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html"
 
       - name: Output uploaded file URL
-        run: echo "Uploaded to https://ap-south-1.amazonaws.com/k6-test-report/k6-reports/summary.html"
+        run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          echo "Uploaded to https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html"
