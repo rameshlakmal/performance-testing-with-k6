@@ -50,7 +50,7 @@ jobs:
           # Add clickable link to workflow summary
           echo "### 🔗 k6 Test Report" >> $GITHUB_STEP_SUMMARY
           echo "[View Full Report]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
-          echo "S3 Path: \`k6-web-dashboard/run_${{ github.run_id }}/report_$TIMESTAMP.html\`" >> $GITHUB_STEP_SUMMARY
+          echo "Direct URL: \`$REPORT_URL\`" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload HTML report as artifact
         uses: actions/upload-artifact@v4
