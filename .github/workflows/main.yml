@@ -31,9 +31,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Sync files to S3
-        uses: jakejarvis/s3-sync-action@v0.5.1
+        uses: aws-actions/s3-sync@v2
         with:
-          aws-s3-bucket: ${{ secrets.AWS_S3_BUCKET }}
+          bucket: ${{ secrets.AWS_S3_BUCKET }}  # Ensure this secret is set!
+          source: ./summary.html
+          destination: k6-reports/
 
 
           
