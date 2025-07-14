@@ -42,5 +42,9 @@ jobs:
           echo "Direct URL: \`$REPORT_URL\`" >> $GITHUB_STEP_SUMMARY
 
 
-
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-html-report
+          path: html-report.html
 
