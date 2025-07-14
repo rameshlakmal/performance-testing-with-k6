@@ -1,1 +1,33 @@
+name: k6 Load Test
 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  k6-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install k6
+        uses: grafana/setup-k6@v3
+        with:
+          version: latest
+
+      - name: Run k6 test and generate HTML report
+        run: |
+          K6_WEB_DASHBOARD=true \
+          K6_WEB_DASHBOARD_EXPORT=html-report.html \
+          k6 run script.js
+
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: k6-html-report
+          path: html-report.html
