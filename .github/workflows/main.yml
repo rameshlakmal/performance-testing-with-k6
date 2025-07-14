@@ -14,12 +14,6 @@ jobs:
         uses: grafana/k6-action@v0.3.1
         with:
           filename: script.js
-
-      # - name: Upload HTML performance report
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: k6-html-report
-      #     path: summary.html
         
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
@@ -34,12 +28,12 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp ./summary.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/
-
+          aws s3 cp ./summary_${{ github.run_id }}.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/$(date +%Y-%m-%d_%H-%M-%S)_summary.html
+          
       - name: Get Public URL
         run: |
           echo "Public URL:"
-          echo "https://${{ secrets.AWS_S3_BUCKET }}.s3.ap-south-1.amazonaws.com/k6-reports/summary.html"
+          echo "https://${{ secrets.AWS_S3_BUCKET }}.s3.ap-south-1.amazonaws.com/k6-reports/summary_${{ github.run_id }}.html"
 
 
           
