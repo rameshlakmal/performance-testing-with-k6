@@ -39,15 +39,5 @@ jobs:
 
       - name: Show Report URL
         run: |
-          echo "::notice title=📊 K6 Report Published::View at: ${{ steps.upload.outputs.REPORT_URL }}"
-          echo "::set-output name=report_url::${{ steps.upload.outputs.REPORT_URL }}"
-          
-      - name: Get Public URL
-        run: |
-          echo "Public URL:"
-          echo "https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html"
-
-      - name: Output uploaded file URL
-        run: |
-          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-          echo "Uploaded to https://k6-test-report.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html"
+          echo "::notice title=📊 K6 Report Published::View at: ${{ steps.upload.outputs.Permanent URL }}"
+          echo "::set-output name=Permanent URL::${{ steps.upload.outputs.Permanent URL }}"
