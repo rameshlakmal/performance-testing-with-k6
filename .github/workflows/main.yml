@@ -28,9 +28,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 
+      # - name: Upload to S3
+      #   run: |
+      #     aws s3 cp ./summary.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/${{ github.run_id }}/summary_$(date +%Y%m%d_%H%M%S).html
       - name: Upload to S3
+        id: upload
         run: |
-          aws s3 cp ./summary.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/${{ github.run_id }}/summary_$(date +%Y%m%d_%H%M%S).html
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          aws s3 cp ./summary.html s3://${{ secrets.AWS_S3_BUCKET }}/k6-reports/run_$TIMESTAMP/summary_$(date +%Y%m%d_%H%M%S).html
+          echo "REPORT_URL=https://${{ secrets.AWS_S3_BUCKET }}.s3.ap-south-1.amazonaws.com/k6-reports/run_$TIMESTAMP/summary.html" >> $GITHUB_OUTPUT
+
+      - name: Show Report URL
+        run: |
+          echo "::notice title=📊 K6 Report Published::View at: ${{ steps.upload.outputs.REPORT_URL }}"
+          echo "::set-output name=report_url::${{ steps.upload.outputs.REPORT_URL }}"
           
       - name: Get Public URL
         run: |
