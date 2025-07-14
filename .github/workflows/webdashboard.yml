@@ -26,6 +26,13 @@ jobs:
           K6_WEB_DASHBOARD_EXPORT=html-report.html \
           k6 run script.js
 
+      - name: Upload HTML report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: k6-html-report
+          path: html-report.html
+
+
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
 
@@ -52,11 +59,6 @@ jobs:
           echo "[View Full Report]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
           echo "Direct URL: \`$REPORT_URL\`" >> $GITHUB_STEP_SUMMARY
 
-      - name: Upload HTML report as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: k6-html-report
-          path: html-report.html
 
 
           
