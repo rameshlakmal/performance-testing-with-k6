@@ -31,5 +31,10 @@ jobs:
           AWS_REGION: ap-south-1
 
 
+
+
+          
+
+
       - name: Output uploaded file URL
         run: echo "Uploaded to https://ap-south-1.amazonaws.com/k6-test-report/k6-reports/summary.html"
