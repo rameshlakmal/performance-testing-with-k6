@@ -3,11 +3,11 @@ import { sleep, check } from "k6";
 import { randomString } from "https://jslib.k6.io/k6-utils/1.2.0/index.js";
 
 export const options = {
-  // stages:[
-  //     {duration: '5m', target: 100}, // Simulate rampup of traffic from 1 to 100 users over 5 min
-  //     {duration: '10m', target: 100}, //Stay at 100 users for 10 min
-  //     {duration: '5m', target: 0},  // Ramp down to 0 users
-  // ],
+  stages: [
+    { duration: "5m", target: 100 }, // Simulate rampup of traffic from 1 to 100 users over 5 min
+    { duration: "10m", target: 100 }, //Stay at 100 users for 10 min
+    { duration: "5m", target: 0 }, // Ramp down to 0 users
+  ],
 
   thresholds: {
     http_req_duration: ["p(99)<150"], // 99% of req must complete below 150ms
